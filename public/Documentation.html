@@ -1,10 +1,151 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html>
+{
+  Description{Saves movie title to specified user.}
+
+  Endpoint URL{/users/:id/:movieTitle}
+
+  Method Type{post}
+
+  Query Parameters{user id and movie title}
+
+  Request Data Format{http://localhost:8080/users/1/The%20Fountain}
+
+  Response Data Format{"id": 1
+                      "name": "Kim"
+                       "favorite movie": "The Fountain"
+                      }
+}
+{
+  Description{Deletes movie title from specified user.}
+
+  Endpoint URL{/users/:id/:movieTitle}
+
+  Method Type{delete}
+
+  Query Parameters{user id and movie title}
+
+  Request Data Format{http://localhost:8080/users/1/The%20Fountain}
+
+  Response Data Format{${movieTitle} has been removed from user ${id}'s array'}
+}
+{
+  Description{Deletes a specified user.}
+
+  Endpoint URL{/users/:id}
+
+  Method Type{delete}
+
+  Query Parameters{user id}
+
+  Request Data Format{http://localhost:8080/users/1}
+
+  Response Data Format{user ${id} has been deleted}
+}
+{
+  Description{Gets a list of movies by director.}
+
+  Endpoint URL{/movies/:director}
+
+  Method Type{get}
+
+  Query Parameters{director name}
+
+  Request Data Format{http://localhost:8080/movies/:director}
+
+  Response Data Format{
+                        "name": "Troll 2"
+                        "genre": "horror"
+                        director:"Claudio Fragasso"
+                      }
+}
+{
+  Description{Gets a list of movies by genre.}
+
+  Endpoint URL{/movies/:genre}
+
+  Method Type{get}
+
+  Query Parameters{genre}
+
+  Request Data Format{http://localhost:8080/movies/:genre}
+
+  Response Data Format{
+                        "name": "Troll 2"
+                        "genre": "horror"
+                        director:"Claudio Fragasso"
+                      }
+}
+{
+  Description{Gets a list of movies.}
+
+  Endpoint URL{/movies}
+
+  Method Type{get}
+
+  Query Parameters{none}
+
+  Request Data Format{http://localhost:8080/movies}
+
+  Response Data Format{
+                        "name": "Troll 2"
+                        "genre": "horror"
+                        director:"Claudio Fragasso"
+                      }
+                      {
+                        "name": "The Room"
+                        "genre": "drama"
+                        "director":"Tommy Wiseau"
+                      }
+}
+{
+  Description{Gets a list of users.}
+
+  Endpoint URL{/users}
+
+  Method Type{get}
+
+  Query Parameters{none}
+
+  Request Data Format{http://localhost:8080/users}
+
+  Response Data Format{
+                        "name": "John"
+                        "id": 1
+                        "favorite movies": []
+                      }
+                      {
+                        "name": "Kim"
+                        "id": 2
+                        "favorite movies": [The fountain]
+                      }
+}
+{
+  Description{Gets a movie by name.}
+
+  Endpoint URL{/movies/:title}
+
+  Method Type{get}
+
+  Query Parameters{movie title}
+
+  Request Data Format{http://localhost:8080/movies/:Title}
+
+  Response Data Format{
+                        "name": "The Room"
+                        "genre": "drama"
+                        "director":"Tommy Wiseau"
+                      }
+}
+Description{Update a user.}
+
+Endpoint URL{/users/:id}
+
+Method Type{put}
+
+Query Parameters{user id}
+
+Request Data Format{http://localhost:8080/users/:id}
+
+Response Data Format{
+                      Status: 200 (user)
+                    }
+}

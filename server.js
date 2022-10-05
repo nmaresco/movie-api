@@ -20,9 +20,9 @@ let users = [
 ];
 
 let movies = [
-  {name: 'Troll 2'},
-  {name: 'The Room'},
-  {name: 'Joe vs The Volcano'}
+  {name: 'Troll 2', genre: 'horror', director: 'Claudio Fragasso'},
+  {name: 'The Room', genre: 'Drama', director: 'Tommy Wiseau' },
+  {name: 'Joe vs The Volcano', genre: 'adventure', director: 'John Shanley'}
 ];
 
 //CREATE
@@ -75,7 +75,7 @@ app.delete('/users/:id/:movieTitle',(req,res) => {
 
   if (user) {
     user.favoriteMovies = user.favoriteMovies.filter( title => title !== movieTitle);
-    res.status(200).send(${movieTitle} has been removed from user ${id}'s array.');
+    res.status(200).send('${movieTitle} has been removed from user ${id}s array.');
   }else{
     res.status(400).send('no such user');
   }
