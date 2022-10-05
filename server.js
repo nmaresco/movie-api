@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid= require('uuid')
 app.use(bodyParser.json());
+app.use(morgan('common'));
+app.use(express.static('public'));
 
 let users = [
   {
@@ -145,9 +147,6 @@ app.use((err, req, res, next) => {
 
 app.use(morgan('common'));
 
-app.get('/movies', function routeHandler(req,res){
-
-})
 app.listen("8080", () => {
 console.log("server running on 8080")
 })
