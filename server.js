@@ -7,11 +7,28 @@ const app = express();
 const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 const uuid= require('uuid')
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
-mongoose.connect('mongodb://localhost:27017/myflixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myflixDB', { useNewUrlParser: true, useUnifiedTopology: true })
+.then(()=>{console.log("mongoDB is running.")})
+.catch(e=>{console.log(e)});
+
+//
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 
 //Add a user
 /* We'll expect JSON in this format.
@@ -248,6 +265,7 @@ app.use((err, req, res, next) => {
 
 app.use(morgan('common'));
 
-app.listen("8080", () => {
+app.listen(8080, () => {
 console.log("server running on 8080")
 })
+//Hello
