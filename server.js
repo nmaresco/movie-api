@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost:27017/myflixDB', { useNewUrlParser: true, 
 .then(()=>{console.log("mongoDB is running.")})
 .catch(e=>{console.log(e)});
 
-//
+//get list of movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
     .then((movies) => {
@@ -215,10 +215,6 @@ app.delete('/users/:id',(req,res) => {
   }
 })
 
-//READ
-app.get('/movies', (req,res) =>{
-  res.status(200).json(movies);
-})
 
 //READ
 app.get('/movies/:title', (req,res) => {
