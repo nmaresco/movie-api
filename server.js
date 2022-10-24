@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/myflixDB', { useNewUrlParser: true, 
 .catch(e=>{console.log(e)});
 
 //get list of movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/movies', (req, res) => {
   Movies.find()
     .then((movies) => {
       res.status(201).json(movies);
@@ -66,7 +66,7 @@ app.post('/users', (req, res) => {
 });
 
 // Get all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt',{session: false}) ,(req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -78,7 +78,7 @@ app.get('/users', (req, res) => {
 });
 
 // Get a user by username
-app.get('/users/:Username', (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt', {session: false}) ,(req, res) => {
   Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
@@ -121,7 +121,7 @@ app.put('/users/:Username', (req, res) => {
 });
 
 // Delete a user by username
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt',{session:false}) ,(req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
@@ -136,30 +136,8 @@ app.delete('/users/:Username', (req, res) => {
     });
 });
 
-let users = [
-  {
-    id: 1,
-    name: "Kim",
-    favoriteMovies: []
-  },
-  {
-    id: 2,
-    name: "Joe",
-    favoriteMovies: ["The Fountain"]
-  }
-];
-
-let movies = [
-  {name: 'Troll 2', genre: 'horror', director: 'Claudio Fragasso'},
-  {name: 'The Room', genre: 'Drama', director: 'Tommy Wiseau' },
-  {name: 'Joe vs The Volcano', genre: 'adventure', director: 'John Shanley'}
-];
-
-//CREATE
-
-
 //UPDATE
-app.put('/users/:id', (req,res) => {
+app.put('/users/:id', passport.authenticate('jwt', {session:false}) ,(req,res) => {
   const {id} = req.param;
   const updatedUser = req.body;
 
@@ -174,7 +152,7 @@ app.put('/users/:id', (req,res) => {
 })
 
 //CREATE
-app.post('/users/:id/:movieTitle',(req,res) => {
+app.post('/users/:id/:movieTitle', passport.authenticate('jwt',{session:false}) ,(req,res) => {
   const {id, movieTitle} = req.params;
 
   let user = users.find( user => user.id == id);
@@ -188,7 +166,7 @@ app.post('/users/:id/:movieTitle',(req,res) => {
 })
 
 //DELETE
-app.delete('/users/:id/:movieTitle',(req,res) => {
+app.delete('/users/:id/:movieTitle', passport.authenticate('jwt',{session:false}) ,(req,res) => {
   const {id, movieTitle} = req.params;
 
   let user = users.find( user => user.id == id);
@@ -202,7 +180,7 @@ app.delete('/users/:id/:movieTitle',(req,res) => {
 })
 
 //DELETE
-app.delete('/users/:id',(req,res) => {
+app.delete('/users/:id',passport.authenticate('jwt',{session:false}) ,(req,res) => {
   const {id} = req.params;
 
   let user = users.find( user => user.id == id);
