@@ -42,7 +42,7 @@ app.get('/movies', (req, res) => {
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', (req, res) => {
+app.post('/users'
   [
     check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
@@ -55,7 +55,7 @@ app.post('/users', (req, res) => {
 
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
-    }
+    };
 
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username })
@@ -81,7 +81,7 @@ app.post('/users', (req, res) => {
       console.error(error);
       res.status(500).send('Error: ' + error);
     });
-});
+};
 
 // Get all users
 app.get('/users', passport.authenticate('jwt',{session: false}) ,(req, res) => {
@@ -261,4 +261,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
 });
-//Hello
