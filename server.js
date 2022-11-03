@@ -43,7 +43,7 @@ app.get('/movies', (req, res) => {
   Email: String,
   Birthday: Date
 }*/
-app.post('/users',
+/*app.post('/users',
   [
     check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
@@ -81,8 +81,7 @@ app.post('/users',
         console.error(error);
         res.status(500).send('Error: ' + error);
       });
-
-});
+})*/
 
 // Get all users
 app.get('/users', passport.authenticate('jwt',{session: false}) ,(req, res) => {
